@@ -11,9 +11,11 @@ on:
     types: [created, edited]
 
 permissions:
-  contents: read
+  contents: write
   issues: write
   pull-requests: write
+  metadata: read
+  id-token: write
 
 jobs:
   claude:
@@ -32,9 +34,8 @@ jobs:
       - name: Claude Code Action
         uses: grll/claude-code-action@beta
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_PERSONAL_TOKEN }}
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
           claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           model: claude-3-5-sonnet-20241022
-          max_thinking_tokens: 32768
